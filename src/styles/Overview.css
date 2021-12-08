@@ -1,0 +1,12 @@
+.overview__main {
+  background-color: white;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 15px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: justify;
+}

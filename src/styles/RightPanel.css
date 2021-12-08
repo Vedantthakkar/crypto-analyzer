@@ -1,0 +1,35 @@
+.rightpanel__main {
+  background-color: white;
+  align-items: center;
+  margin-left: 25px;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 10px;
+
+  font-family: Raleway;
+  font-style: normal;
+  min-height: 60px;
+}
+
+.rightpanel__keymatrics {
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 35px;
+  color: #020000;
+}
+
+.rightpanel__first {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  margin-top: 10px;
+  color: #020000;
+}
+
+.rightpanel__second {
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 29px;
+
+  color: #020000;
+}
