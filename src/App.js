@@ -77,11 +77,44 @@ function App() {
       })
       .then(function (json) {
         setpara(json["description"]["en"]);
-        console.log(para);
+        //console.log(para);
       });
   }
+  let predictedData=0;
+  function handleClick(){
+    //console.log('hi')
+    // var namePredict = document.getElementById("name");
+    // var entry = {
+    //   namePredict: namePredict.value,
+    // };
+    // console.log(entry);
+    fetch(`${window.origin}/predict`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({Name}),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json",
+      }),
+    }).then(function (response) {
+      if (response.status != 200) {
+        console.log(`error!`);
+        // document.getElementById("predict-visible").innerHTML = "Unavailable, try again!";
+        // document.getElementById("predict-visible").style.visibility = "hidden";
+        return;
+      }
+      response.text().then(function (data) {
+       // predictedData=data;
+        console.log(predictedData);
+        
+        // document.getElementById("predict-visible").innerHTML = h;
+        // document.getElementById("predict-visible").style.visibility = "visible";
+      });
+    });
+   }
 
   function HighLow() {
+    //console.log('hi');
     let tomorrow =
       Date.parse(new Date(new Date().setDate(new Date().getDate() - 1))) / 1000;
     let today = Date.parse(new Date()) / 1000;
@@ -113,7 +146,7 @@ function App() {
 
   useEffect(() => {
     StartDate1 = StartDate;
-    console.log(StartDate1);
+    //console.log(StartDate1);
   }, [StartDate1, StartDate]);
   //console.log(StartDate1);
   //useEffect(HighLow());
@@ -156,7 +189,7 @@ function App() {
         }
         setmarketCap(cap);
         setvolume(vol);
-        console.log(volume);
+       // console.log(volume);
 
         // console.log(stockChartXValuesFunction);
         setstockChartXValues(stockChartXValuesFunction);
@@ -192,9 +225,11 @@ function App() {
         </div>
         <div className="app__side">
           <div style={{ fontWeight: "900", fontSize: "30px" }}>Prediction</div>
-          <Button style={{ margin: "10px 0px 0px 35px" }} variant="primary">
+          <Button style={{ margin: "10px 0px 0px 35px" }} variant="primary" onClick={()=>{handleClick()}}>
             Predict
           </Button>
+          <div style={{ fontWeight: "900", fontSize: "30px" }}>${predictedData}</div>
+          
         </div>
       </div>
     </div>
