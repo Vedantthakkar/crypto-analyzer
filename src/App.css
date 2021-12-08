@@ -9,3 +9,14 @@
   font-size: px;
   font-weight: 600;
 }
+
+.app__side {
+  width: 15%;
+  height: 250px;
+  background-color: white;
+  padding-left: 30px;
+  padding-top: 10px;
+  margin-left: 40px;
+  border: 2px solid black;
+  border-radius: 15px;
+}

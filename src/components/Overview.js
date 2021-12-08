@@ -1,14 +1,15 @@
-import React from 'react'
-import { Container, Card, Row, Col, Button } from 'react-bootstrap'
-const Overview = ({para}) => {
-    return (
-        <div  >
-            <Card>
-                <Card.Body dangerouslySetInnerHTML={{__html: para}}>
-                </Card.Body>
-            </Card>
-        </div>
-    )
-}
+import React from "react";
+import { Card } from "react-bootstrap";
+import "../styles/Overview.css";
 
-export default Overview
+const Overview = ({ para }) => {
+  return (
+    <div>
+      <Card className="overview__main">
+        <Card.Body dangerouslySetInnerHTML={{ __html: para }}></Card.Body>
+      </Card>
+    </div>
+  );
+};
+
+export default Overview;
