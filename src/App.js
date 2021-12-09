@@ -7,12 +7,15 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import MainPanel from "./components/MainPanel";
 import RightPanel from "./components/RightPanel";
 import React from "react";
+import * as axios from 'axios'
+ 
 
 function App() {
   const [Name, setName] = useState("");
   const [stockChartXValues, setstockChartXValues] = useState([]);
   const [stockChartYValues, setstockChartYValues] = useState([]);
   const [isRender, setisRender] = useState(false);
+  const [predictedData, setPredictedData] = useState(0.0)
   const [StartDate, setStartDate] = useState(
     new Date(new Date().setDate(new Date().getDate() - 1))
   );
@@ -80,7 +83,6 @@ function App() {
         //console.log(para);
       });
   }
-  let predictedData=0;
   function handleClick(){
     //console.log('hi')
     // var namePredict = document.getElementById("name");
@@ -88,29 +90,42 @@ function App() {
     //   namePredict: namePredict.value,
     // };
     // console.log(entry);
-    fetch(`${window.origin}/predict`, {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({Name}),
-      cache: "no-cache",
-      headers: new Headers({
-        "content-type": "application/json",
-      }),
-    }).then(function (response) {
+    // fetch(`http://localhost:5000/predict`, {
+    //   method: "POST",
+    //   credentials: "include",
+    //   body: JSON.stringify({"name":Name}),
+    //   cache: "no-cache",
+    //   headers: new Headers({
+    //     "content-type": "application/json",
+    //     'Access-Control-Allow-Credentials': 'true',
+    //     'Access-Control-Allow-Origin': 'http://localhost:3000'
+
+    //   }),
+    // }).then(function (response) {
+    //   if (response.status != 200) {
+    //     console.log(`error!`);
+    //     return;
+    //   }
+    //   response.text().then(function (data) {
+    //     console.log(predictedData);
+        
+    //   });
+    // });
+
+  
+
+    axios.post('http://localhost:5000/predict',{name:Name}).then(function (response) {
       if (response.status != 200) {
         console.log(`error!`);
         // document.getElementById("predict-visible").innerHTML = "Unavailable, try again!";
         // document.getElementById("predict-visible").style.visibility = "hidden";
         return;
       }
-      response.text().then(function (data) {
-       // predictedData=data;
-        console.log(predictedData);
-        
-        // document.getElementById("predict-visible").innerHTML = h;
-        // document.getElementById("predict-visible").style.visibility = "visible";
-      });
-    });
+      
+      setPredictedData(response.data[0][0])
+      
+      console.log(predictedData);
+    })
    }
 
   function HighLow() {
@@ -152,6 +167,7 @@ function App() {
   //useEffect(HighLow());
 
   function ApiGet() {
+    setPredictedData(0)
     HighLow();
     getPara();
     //console.log(Name);
